@@ -535,7 +535,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.rv').forEach(function(s){io.observe(s)});
 var msgs=['<div class="h">💎 Edge | 🟡 Gold | ⬇️ SELL</div><div class="g">🟢 NEW TRADE</div><div class="m">Entry 3838.33 · Stop 3847.23 · Size 0.01</div><div class="m">🧠 Why? reason + market mode + exact risk</div>','<div class="h">🚀 Breakout | 🟡 Gold | ⬇️ SELL</div><div class="y">🔒 STOP MOVED (BREAK_EVEN)</div><div class="m">Progress 1.09R · locked +0.05R</div>','<div class="h">💎 Edge | 🟡 Gold | ⬇️ SELL</div><div class="g">✅ WIN +2.93R</div><div class="m">🟢 Trailing stop · profit locked</div>'],mi=0,going=false;
-function next(){var f=$('feed');if(mi>=msgs.length){setTimeout(function(){f.innerHTML='';mi=0;next()},3500);return}var d=document.createElement('div');d.className='tm';d.innerHTML=msgs[mi++];f.appendChild(d);requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('show');buzz(4)})});setTimeout(next,1900)}
+function next(){var f=$('feed');if(mi>=msgs.length){setTimeout(function(){f.innerHTML='';mi=0;next()},3500);return}var d=document.createElement('div');d.className='tm';d.innerHTML=msgs[mi++];f.appendChild(d);requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('show')})});setTimeout(next,1900)}
 var bo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!going){going=true;next();document.querySelectorAll('[data-count]').forEach(function(el){var to=+el.dataset.count,n=0,t=setInterval(function(){el.textContent=++n;if(n>=to)clearInterval(t)},180)});bo.disconnect()}})},{threshold:.25});bo.observe($('botsec'));
 
 /* ---------- أشكال الكارت (مؤقت للمقارنة) ---------- */
@@ -547,7 +547,7 @@ apply();
 if(KM.api)fetch(KM.api+'?t='+Date.now()).then(function(r){return r.json()}).then(function(d){if(!d||!d.ok)return;['gallery','media','status','tag'].forEach(function(k){if(d[k]!=null)KM[k]=d[k]});render()}).catch(function(){});
 var sp=$('splash'),seen=false;try{seen=sessionStorage.getItem('sp3')}catch(e){}
 function hideSp(){sp.classList.add('out');setTimeout(function(){sp.remove();showTag()},500)}
-function showTag(){if(KM.tag.show&&(new URLSearchParams(location.search).get('s')=='t'||location.hash=='#tag'))setTimeout(function(){$('tagHi').classList.add('on');buzz([15,40,15])},300)}
+function showTag(){if(KM.tag.show&&(new URLSearchParams(location.search).get('s')=='t'||location.hash=='#tag'))setTimeout(function(){$('tagHi').classList.add('on')},300)}
 if(seen||reduce){sp.remove();showTag()}else{try{sessionStorage.setItem('sp3','1')}catch(e){}var nm='Kareem Mostafa',k=0,t=setInterval(function(){if(!$('sn')){clearInterval(t);return}$('sn').textContent=nm.slice(0,++k);if(k>=nm.length){clearInterval(t);setTimeout(hideSp,450)}},65);sp.onclick=hideSp}
 }
 </script>
