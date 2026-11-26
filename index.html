@@ -583,7 +583,7 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
     <h3 data-ar="عايز صفحة زي دي؟ 🔥" data-en="Want a page like this? 🔥"></h3>
     <p data-ar="صفحة باسمك وتاج NFC، قرّبه من أي موبايل وصفحتك تفتح على طول." data-en="A page with your name and an NFC tag: tap any phone and your page opens instantly."></p>
     <a class="big" href="https://wa.me/201070804071?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%83%D8%B1%D9%8A%D9%85%20%F0%9F%91%8B%20%D8%B4%D9%81%D8%AA%20%D8%B5%D9%81%D8%AD%D8%AA%D9%83%20%D9%88%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%B5%D9%81%D8%AD%D8%A9%20%D8%B2%D9%8A%D9%87%D8%A7" data-ar="اطلب صفحتك" data-en="Order yours"></a>
-    <a class="big tg" href="https://t.me/AswanyAssist_bot" data-app="tg://resolve?domain=AswanyAssist_bot" data-ar="🤖 أو اطلب من البوت" data-en="🤖 Or order via the bot"></a>
+    <a class="big tg" href="https://t.me/AswanyAssist_bot?start=idea" data-app="tg://resolve?domain=AswanyAssist_bot&amp;start=idea" data-ar="🤖 أو اطلب من البوت" data-en="🤖 Or order via the bot"></a>
     <button class="tryopen" type="button" id="tryOpen"><span data-ar="✨ جرّب صفحتك في ١٠ ثواني" data-en="✨ Try your page in 10 seconds"></span><i>⌄</i></button>
     <div class="trybox" id="tryBox"><div><div class="try" style="text-align:start">
       <div><label for="tName" data-ar="اسمك" data-en="Your name"></label><input id="tName" maxlength="28" autocomplete="name"></div>
@@ -722,7 +722,7 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
 
 <script>
 var LAB=false;
-var BUILD='202611260933'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
+var BUILD='202611260953'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
 var L='ar';
 var KM={wa:'201070804071',api:'https://script.google.com/macros/s/AKfycbw9Vvkt-F3L26bCXiLAbSN2984ierqxCQNHcdG8vHZdAjcNYV335GxcDNjMo1_q0QCmHg/exec',media:[],
  status:{mode:'auto',from:10,to:24,on:['متاح للرد دلوقتي','Available to reply now'],off:['هرد عليك من الساعة ١٠ الصبح',"I'll reply from 10 AM"]},
@@ -835,7 +835,7 @@ $('tPic').onchange=function(){var f=this.files[0];if(!f)return;var im=new Image(
 
 /* ---------- اكتب فكرتك: مساعد بيفهم كلام الزبون ---------- */
 var norm=function(s){return String(s).toLowerCase().replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي')};
-var WA='https://wa.me/201070804071?text=',TG='https://t.me/AswanyAssist_bot';
+var WA='https://wa.me/201070804071?text=',TG='https://t.me/AswanyAssist_bot?start=idea';
 var KINDS=[
  {k:'shop',w:['محل','صالون','مطعم','كافيه','كافي','عياده','صيدليه','جيم','متجر','ستور','براند','زباين','زبون','مخبز','كوافير','حلاق','شوب','فرع','منيو','اوردر','توصيل','restaurant','shop','store','cafe','clinic','salon','gym'],
   ar:{t:'فكرتك تنفع تبقى <b>تطبيق لمحلك</b> 🏪',p:['تطبيق بيتثبّت على موبايل الزبون، باسم محلك وشعاره','لوحة تحكم ليك تغيّر منها الأسعار والعروض في ثانية','إشعار بيوصل لكل زباينك أول ما تنزّل عرض','إحصائيات: مين زار، ومين ضغط، ومنين جه'],x:'زي تطبيق <a href="https://nfc341.github.io/ahmedamer">صالون أحمد عامر</a> اللي شغال دلوقتي.'},
