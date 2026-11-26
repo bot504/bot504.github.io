@@ -722,12 +722,12 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
 
 <script>
 var LAB=false;
-var BUILD='202611260911'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
+var BUILD='202611260931'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
 var L='ar';
 var KM={wa:'201070804071',api:'https://script.google.com/macros/s/AKfycbw9Vvkt-F3L26bCXiLAbSN2984ierqxCQNHcdG8vHZdAjcNYV335GxcDNjMo1_q0QCmHg/exec',media:[],
  status:{mode:'auto',from:10,to:24,on:['متاح للرد دلوقتي','Available to reply now'],off:['هرد عليك من الساعة ١٠ الصبح',"I'll reply from 10 AM"]},
  tag:{show:true,title:['إنت لسه فاتح صفحتي بلمسة 👋','You just opened my page with a tap 👋'],text:['ده التاج اللي بعمله: يلمس أي موبايل وصفحتك تفتح على طول، من غير تطبيقات ولا كتابة رقم. تحب واحد باسمك؟','This is the tag I make: tap any phone and your page opens instantly, no apps, no typing. Want one with your name?'],yes:['عايز واحد','I want one'],no:['كمّل للصفحة','Continue']},
- gallery:[{n:['صالون أحمد عامر','Ahmed Amer Barber Shop'],k:['تطبيق محل كامل','Full shop app'],u:'https://nfc341.github.io/ahmedamer',img:'img/g_ahmed.webp'},{n:['فتحي علاء','Fathy Alaa'],k:['مستشار مبيعات سيارات','Car sales advisor'],u:'https://nfc341.github.io/fathy/',img:'img/g_fathy.webp'},{n:['كريم نعيم','Kareem Naeem'],k:['مهندس فني','Technical engineer'],u:'https://nfc341.github.io/2/',img:'img/g_naeem.webp'}],
+ gallery:[{n:['صالون أحمد عامر','Ahmed Amer Barber Shop'],k:['تطبيق محل كامل','Full shop app'],u:'https://nfc341.github.io/ahmedamer',img:'https://bot504.github.io/img/g_ahmed.webp'},{n:['فتحي علاء','Fathy Alaa'],k:['مستشار مبيعات سيارات','Car sales advisor'],u:'https://nfc341.github.io/fathy/',img:'https://bot504.github.io/img/g_fathy.webp'},{n:['كريم نعيم','Kareem Naeem'],k:['مهندس فني','Technical engineer'],u:'https://nfc341.github.io/2/',img:'https://bot504.github.io/img/g_naeem.webp'}],
  colors:['#00d1c1','#f0b90b','#1fa855','#7c4dff','#e53935','#e91e63','#2b2b2b']};
 var $=function(i){return document.getElementById(i)};
 var A=function(x){return L=='ar'?x[0]:(x[1]||x[0])};
@@ -798,8 +798,13 @@ document.addEventListener('visibilitychange',function(){if(!document.hidden){liv
 setInterval(function(){if(!document.hidden){liveData();checkBuild()}},90000);
 
 /* ---------- المعرض ---------- */
+/* صور جاهزة لصفحات العملاء: لو صورة اتمسحت أو لينكها ناقص، بتترجع لوحدها، وبتتحفظ صح مع أول حفظ من اللوحة */
+var GIMG={'nfc341.github.io/ahmedamer':'g_ahmed','nfc341.github.io/fathy':'g_fathy','nfc341.github.io/2':'g_naeem','bot504.github.io':'icon-512'};
+function gFix(g){if(!g)return g;var im=String(g.img||'');if(/^https:\/\//.test(im))return g;var k=String(g.u||'').replace(/^https?:\/\//,'').replace(/\/+$/,'').split('?')[0],f=GIMG[k];
+ if(f)g.img='https://bot504.github.io/img/'+f+(f=='icon-512'?'.png':'.webp');else if(im)g.img='https://bot504.github.io/'+im.replace(/^\.?\//,'');return g}
 function gallery(){
- $('gal').innerHTML=(KM.gallery||[]).map(function(g){return '<a class="fp" href="'+esc(g.u)+'"><div class="ph"><img src="'+esc(g.img)+'" alt="'+esc(A(g.n))+'" loading="lazy" decoding="async" draggable="false"></div><b>'+esc(A(g.n))+'</b><span>'+esc(A(g.k))+'</span></a>'}).join('');
+ (KM.gallery||[]).forEach(gFix);
+ $('gal').innerHTML=(KM.gallery||[]).map(function(g){return '<a class="fp" href="'+esc(g.u)+'"><div class="ph"><img src="'+esc(g.img)+'" alt="" loading="lazy" decoding="async" draggable="false" onerror="this.style.visibility=\'hidden\'"></div><b>'+esc(A(g.n))+'</b><span>'+esc(A(g.k))+'</span></a>'}).join('');
  $('galSec').hidden=!(KM.gallery||[]).length;flow();
 }
 function flow(){var box=$('gal'),r=box.getBoundingClientRect(),c=r.left+r.width/2;box.querySelectorAll('.fp').forEach(function(f){var b=f.getBoundingClientRect(),d=(b.left+b.width/2-c)/r.width;f.style.setProperty('--fy',(-d*55).toFixed(1)+'deg');f.style.setProperty('--fs',(1-Math.min(.22,Math.abs(d)*.35)).toFixed(3));f.style.setProperty('--fo',(1-Math.min(.55,Math.abs(d)*.8)).toFixed(2))})}
