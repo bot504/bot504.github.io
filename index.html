@@ -315,6 +315,15 @@ html[dir=rtl] .pr small{text-align:right}
 .appc b{display:block;font-size:15px}.appc span{font-size:12.5px;color:var(--muted);line-height:1.6;display:block}
 .appc button{margin-inline-start:auto;flex:none;padding:10px 16px;border-radius:16px;border:0;background:#1a86c2;color:#fff;font:800 14px inherit;font-family:inherit;cursor:pointer}
 
+/* الإشعارات على الموبايل */
+.pushc{display:flex;align-items:center;gap:14px;padding:16px;border-radius:24px;margin-top:10px;background:linear-gradient(135deg,rgba(240,185,11,.14),rgba(16,24,40,.6));border:1px solid rgba(240,185,11,.4)}
+.pushc .bl{width:52px;height:52px;border-radius:16px;flex:none;display:flex;align-items:center;justify-content:center;font-size:26px;background:rgba(240,185,11,.15)}
+.pushc b{display:block;font-size:15px}.pushc span{font-size:12.5px;color:var(--muted);line-height:1.6;display:block}
+.pushc button{margin-inline-start:auto;flex:none;padding:10px 14px;border-radius:16px;border:0;background:var(--gold);color:#012;font:800 14px inherit;font-family:inherit;cursor:pointer}
+.pushc.on button{background:rgba(34,197,94,.18);color:#86efac;border:1px solid rgba(34,197,94,.5)}
+.steps2{text-align:start;display:grid;gap:8px;width:100%;font-size:14px;line-height:1.7;counter-reset:s}
+.steps2 div{display:flex;gap:10px;align-items:flex-start}.steps2 div:before{counter-increment:s;content:counter(s);width:24px;height:24px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 12px 'Inter';background:rgba(240,185,11,.2);color:var(--gold)}
+
 footer{display:flex;justify-content:center;align-items:center;gap:10px;color:#55657d;font-size:12px;margin-top:30px}
 footer button{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.08);background:transparent;color:#55657d;cursor:pointer;display:flex;align-items:center;justify-content:center}
 footer button svg{width:14px;height:14px;fill:currentColor}
@@ -606,8 +615,9 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
   </section>
 
   <!-- 16. التطبيق -->
-  <section class="rv" id="appSec"><div class="appc"><img src="img/icon-192.png" alt="" width="62" height="62" loading="lazy"><div><b data-ar="صفحتي كتطبيق على موبايلك" data-en="My page as an app"></b><span data-ar="أيقونة على الشاشة، وبتفتح في ثانية حتى من غير نت." data-en="An icon on your home screen that opens instantly, even offline."></span></div><button type="button" id="instBtn" data-ar="ثبّت" data-en="Install"></button></div>
+  <section class="rv" id="appSec"><div class="appc" id="instCard"><img src="img/icon-192.png" alt="" width="62" height="62" loading="lazy"><div><b data-ar="صفحتي كتطبيق على موبايلك" data-en="My page as an app"></b><span data-ar="أيقونة على الشاشة، وبتفتح في ثانية حتى من غير نت." data-en="An icon on your home screen that opens instantly, even offline."></span></div><button type="button" id="instBtn" data-ar="ثبّت" data-en="Install"></button></div>
     <p class="note" id="instTip" hidden style="margin-top:8px"></p>
+    <div class="pushc" id="pushCard"><span class="bl">🔔</span><div><b id="pushT" data-ar="خليك أول واحد يعرف" data-en="Be the first to know"></b><span id="pushS" data-ar="إشعار على موبايلك بكل جديد، حتى والصفحة مقفولة." data-en="A notification on your phone for anything new, even when the page is closed."></span></div><button type="button" id="pushBtn" data-ar="فعّل" data-en="Turn on"></button></div>
   </section>
 
   <!-- 17. تحت -->
@@ -619,6 +629,7 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
 <div class="sheet" id="tagHi" role="dialog" aria-modal="true"><div class="bx"><div class="wave"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#5fe0e0" stroke-width="1.8" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7"/><path d="M9.5 6a9 9 0 0 1 0 12"/><path d="M13 3.5a13 13 0 0 1 0 17"/></svg></div><h3 id="tagH"></h3><p id="tagP"></p><div class="r"><a class="big" id="tagY" href="#" style="font-size:14px"></a><button class="big tg" id="tagN" type="button" style="font-size:14px"></button></div></div></div>
 <!-- كود الصفحة -->
 <div class="sheet" id="qrSh" role="dialog" aria-modal="true"><div class="bx"><div class="qrb qrSlot"></div><b data-ar="امسحني بالكاميرا" data-en="Scan me with your camera"></b><small style="color:var(--muted);direction:ltr">bot504.github.io</small><button class="big tg" type="button" id="qrX" style="width:100%;font-size:14px" data-ar="تمام" data-en="Done"></button></div></div>
+<div class="sheet" id="iosSh" role="dialog" aria-modal="true"><div class="bx"><div style="font-size:34px">🔔</div><h3 data-ar="الإشعارات على الأيفون" data-en="Notifications on iPhone"></h3><p data-ar="الأيفون بيبعت إشعارات للصفحة بس لما تكون متثبّتة على الشاشة الرئيسية:" data-en="iPhone only sends notifications to pages added to the Home Screen:"></p><div class="steps2"><div data-ar="افتح الصفحة من سفاري" data-en="Open this page in Safari"></div><div data-ar="دوس زرار المشاركة تحت" data-en="Tap the Share button"></div><div data-ar="اختار «إضافة إلى الشاشة الرئيسية»" data-en="Choose “Add to Home Screen”"></div><div data-ar="افتح الصفحة من الأيقونة ودوس «فعّل» تاني" data-en="Open it from the icon and tap “Turn on” again"></div></div><button class="big tg" type="button" id="iosX" style="width:100%;font-size:14px" data-ar="تمام" data-en="Got it"></button></div></div>
 <div id="lbx"><img id="lbxI" alt=""></div>
 
 <!-- لوحة المعاينة: للمقارنة بس، بتتشال قبل الرفع -->
@@ -693,7 +704,10 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
       <div class="f"><label for="nXe">بالإنجليزي</label><textarea id="nXe" maxlength="220"></textarea></div>
       <div class="g2"><div class="f"><label for="nB">كلمة الزرار (اختياري)</label><input id="nB" maxlength="30"></div><div class="f"><label for="nBe">بالإنجليزي</label><input id="nBe" maxlength="30"></div></div>
       <div class="f"><label for="nU">لينك الزرار (اختياري)</label><input id="nU" type="url" placeholder="https://..."></div>
+      <label class="chk"><input type="checkbox" id="nPush" checked> ابعته كمان إشعار على موبايلات المشتركين</label>
+      <div class="f"><label for="nH">عنوان إشعار الموبايل (اختياري)</label><input id="nH" maxlength="60" placeholder="كريم الأسواني"></div>
       <button class="go2" type="submit">نشر الإشعار</button>
+      <button class="sb" type="button" id="nOnly">ابعت للموبايلات بس، من غير ما يظهر في الصفحة</button>
     </form>
     <form id="kaP" class="f" hidden style="gap:10px">
       <div class="f"><label for="pN">الرقم السري الجديد (أرقام بس، من ٤ لـ ١٢)</label><input id="pN" type="password" inputmode="numeric" autocomplete="new-password" required></div>
@@ -708,7 +722,7 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
 
 <script>
 var LAB=false;
-var BUILD='202611260833'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
+var BUILD='202611260911'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
 var L='ar';
 var KM={wa:'201070804071',api:'https://script.google.com/macros/s/AKfycbw9Vvkt-F3L26bCXiLAbSN2984ierqxCQNHcdG8vHZdAjcNYV335GxcDNjMo1_q0QCmHg/exec',media:[],
  status:{mode:'auto',from:10,to:24,on:['متاح للرد دلوقتي','Available to reply now'],off:['هرد عليك من الساعة ١٠ الصبح',"I'll reply from 10 AM"]},
@@ -749,7 +763,7 @@ function apply(){
  $('askQ').placeholder=L=='ar'?'اكتب فكرتك بكلامك… مثلاً: عندي مطعم وعايز الزباين يطلبوا من الموبايل':'Describe your idea… e.g. I own a restaurant and want customers to order from their phones';
  render();
 }
-function render(){status();gallery();media();tryPage();tagMsg();goals();notice();resetChat();typer()}
+function render(){status();gallery();media();tryPage();tagMsg();goals();notice();resetChat();typer();if(window.pushUI)pushUI()}
 window.kmRender=function(){status();gallery();media();tryPage();tagMsg();goals();notice()};
 function status(){var s=KM.status,h=new Date().getHours(),on=s.mode=='on'||(s.mode=='auto'&&h>=s.from&&h<s.to);document.querySelectorAll('.avail').forEach(function(e){e.classList.toggle('busy',!on)});document.querySelectorAll('.availT').forEach(function(e){e.textContent=A(on?s.on:s.off)})}
 
@@ -878,10 +892,10 @@ document.querySelectorAll('[data-goask]').forEach(function(a){a.onclick=function
 /* ---------- التطبيق ---------- */
 var dp=null,standalone=window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone;
 window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e});
-if(standalone)$('appSec').hidden=true;
-$('instBtn').onclick=function(){if(dp){dp.prompt();dp.userChoice.then(function(c){if(c.outcome=='accepted')$('appSec').hidden=true});dp=null;return}
+if(standalone)$('instCard').hidden=true;
+$('instBtn').onclick=function(){if(dp){dp.prompt();dp.userChoice.then(function(c){if(c.outcome=='accepted')$('instCard').hidden=true});dp=null;return}
  var ios=/iPhone|iPad|iPod/i.test(navigator.userAgent);$('instTip').textContent=ios?(L=='ar'?'من زرار المشاركة تحت اختار: إضافة إلى الشاشة الرئيسية':'Tap Share, then: Add to Home Screen'):(L=='ar'?'من قايمة المتصفح (النقط التلاتة) اختار: تثبيت التطبيق':'From the browser menu (⋮) choose: Install app');$('instTip').hidden=false};
-window.addEventListener('appinstalled',function(){$('appSec').hidden=true;toast(L=='ar'?'اتثبّتت ✓':'Installed ✓')});
+window.addEventListener('appinstalled',function(){$('instCard').hidden=true;toast(L=='ar'?'اتثبّتت ✓':'Installed ✓')});
 
 /* ---------- رسالة التاج ---------- */
 function tagMsg(){var t=KM.tag;$('tagH').textContent=A(t.title);$('tagP').textContent=A(t.text);$('tagY').textContent=A(t.yes);$('tagN').textContent=A(t.no);$('tagY').href='https://wa.me/'+KM.wa+'?text='+encodeURIComponent(L=='ar'?'أهلاً كريم 👋 لمست التاج بتاعك وعايز واحد زيه':'Hi Kareem 👋 I tapped your tag and I want one like it')}
@@ -966,13 +980,34 @@ function intro(force){var sp=$('sp');if(!sp)return;var seen=false;try{seen=sessi
  at(14400,end);
  S.onclick=function(e){e.stopPropagation();buzz(8);end()};
 }
+/* ---------- إشعارات الموبايل (OneSignal) ---------- */
+var OS_APP='7bcd7ae0-e161-423c-a09b-710d8649cf7e',OS=null,isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform=='MacIntel'&&navigator.maxTouchPoints>1);
+function pushOn(){return ('Notification' in window)&&Notification.permission=='granted'&&(!OS||OS.User.PushSubscription.optedIn!==false)}
+function pushUI(){var on=pushOn(),c=$('pushCard');c.classList.toggle('on',on);
+ $('pushBtn').textContent=on?(L=='ar'?'✓ شغالة':'✓ On'):(L=='ar'?'فعّل':'Turn on');
+ $('pushT').textContent=on?(L=='ar'?'الإشعارات شغالة عندك':'Notifications are on'):$('pushT').getAttribute('data-'+L);
+ if(('Notification' in window)&&Notification.permission=='denied'&&!on)$('pushS').textContent=L=='ar'?'الإشعارات مقفولة من المتصفح. افتحها من إعدادات الموقع (القفل جنب الرابط).':'Notifications are blocked. Allow them from the site settings (the lock next to the address).'}
+function osLoad(){if(OS||location.protocol!='https:'||!('serviceWorker' in navigator))return;
+ window.OneSignalDeferred=window.OneSignalDeferred||[];
+ OneSignalDeferred.push(async function(O){try{await O.init({appId:OS_APP,serviceWorkerPath:'push/onesignal/OneSignalSDKWorker.js',serviceWorkerUpdaterPath:'push/onesignal/OneSignalSDKUpdaterWorker.js',serviceWorkerParam:{scope:'/push/onesignal/'},promptOptions:{autoPrompt:false},notifyButton:{enable:false}});OS=O;O.Notifications.addEventListener('permissionChange',pushUI);O.User.PushSubscription.addEventListener('change',pushUI);
+  if(('Notification' in window)&&Notification.permission=='granted'&&!O.User.PushSubscription.optedIn){try{await O.User.PushSubscription.optIn()}catch(e){}}pushUI()}catch(e){console.warn('OneSignal',e)}});
+ var s=document.createElement('script');s.src='https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js';s.defer=true;document.head.appendChild(s)}
+$('pushBtn').onclick=async function(){buzz(10);
+ if(pushOn()){toast(L=='ar'?'الإشعارات شغالة ✓':'Notifications are on ✓');return}
+ if(isIOS&&!standalone){$('iosSh').classList.add('on');return}
+ if(!('Notification' in window)){toast(L=='ar'?'المتصفح ده مش بيدعم الإشعارات':'This browser does not support notifications');return}
+ if(!OS){osLoad();toast(L=='ar'?'ثانية واحدة… دوس تاني':'One second… tap again');return}
+ try{await OS.Notifications.requestPermission();if(Notification.permission=='granted'){await OS.User.PushSubscription.optIn();toast(L=='ar'?'تمام ✓ هيوصلك كل جديد':'Done ✓ you will get every update')}}catch(e){}
+ pushUI()};
+$('iosX').onclick=function(){$('iosSh').classList.remove('on')};$('iosSh').onclick=function(e){if(e.target==$('iosSh'))$('iosSh').classList.remove('on')};
+
 /* ---------- البداية ---------- */
 var sl=store.get('kl');if(sl=='en'||sl=='ar')L=sl;
 apply();heroStart();
 intro();
 liveData();
 var later=window.requestIdleCallback||function(f){setTimeout(f,1200)};
-addEventListener('load',function(){if(!reduce)later(fx);if('serviceWorker' in navigator&&location.protocol=='https:'){var hadCtl=!!navigator.serviceWorker.controller,rl=false;navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(r){window.__swr=r;r.update().catch(function(){})}).catch(function(){});navigator.serviceWorker.addEventListener('controllerchange',function(){if(!hadCtl||rl||$('kmA').classList.contains('on'))return;rl=true;location.reload()})}});
+addEventListener('load',function(){if(!reduce)later(fx);later(osLoad);if('serviceWorker' in navigator&&location.protocol=='https:'){var hadCtl=!!navigator.serviceWorker.controller,rl=false;navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(r){window.__swr=r;r.update().catch(function(){})}).catch(function(){});navigator.serviceWorker.addEventListener('controllerchange',function(){if(!hadCtl||rl||$('kmA').classList.contains('on'))return;rl=true;location.reload()})}});
 </script>
 <script>
 /* ===== لوحة كريم: من القفل اللي تحت، أو ضغطة طويلة على صورتك، أو #admin ===== */
@@ -1035,7 +1070,9 @@ addEventListener('load',function(){if(!reduce)later(fx);if('serviceWorker' in na
  $('oNew').onclick=function(){oFill(-1);msg('')};
  $('oTS').onclick=function(){save('goals',gWrap((KM.goals||{items:[]}).items||[]),'اتحفظ اسم القسم ✓')};
  /* الإشعار */
- $('kaN').onsubmit=function(e){e.preventDefault();save('notice',{show:$('nShow').checked,text:[$('nX').value,$('nXe').value],btn:[$('nB').value,$('nBe').value],u:$('nU').value},'اتنشر ✓ هيظهر لكل اللي يفتح الصفحة')};
+ function sendPush(){msg('بيتبعت للموبايلات...');return api({a:'push',title:[$('nH').value,''],text:[$('nX').value,$('nXe').value],u:$('nU').value}).then(function(){msg('اتبعت ✓ وصل لكل المشتركين')}).catch(function(x){msg(x.message)})}
+ $('kaN').onsubmit=function(e){e.preventDefault();var p=$('nPush').checked;save('notice',{show:$('nShow').checked,text:[$('nX').value,$('nXe').value],btn:[$('nB').value,$('nBe').value],u:$('nU').value},'اتنشر ✓ هيظهر لكل اللي يفتح الصفحة').then(function(){if(p)return sendPush()})};
+ $('nOnly').onclick=function(){if(!$('nX').value.trim()){msg('اكتب كلام الإشعار الأول');return}sendPush()};
  /* الرقم السري */
  $('kaP').onsubmit=function(e){e.preventDefault();var a1=$('pN').value.trim(),a2=$('pN2').value.trim();if(a1!==a2){msg('الرقمين مش زي بعض');return}if(!/^\d{4,12}$/.test(a1)){msg('أرقام بس، من ٤ لـ ١٢ رقم');return}msg('بيتغيّر...');api({a:'pin',newPin:a1}).then(function(){pin=a1;try{sessionStorage.setItem('km_pin',pin)}catch(x){}$('pN').value='';$('pN2').value='';msg('الرقم السري اتغيّر ✓ استخدم الجديد من هنا ورايح')}).catch(function(x){msg(x.message)})};
  $('kaS').onsubmit=function(e){e.preventDefault();save('status',{mode:$('sMode').value,from:+$('sFrom').value,to:+$('sTo').value,on:[$('sOn').value,$('sOnE').value],off:[$('sOff').value,$('sOffE').value]})};
