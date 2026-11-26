@@ -772,7 +772,7 @@ var QUICK={
 function score(q,w){var s=0;w.forEach(function(x){if(q.indexOf(norm(x))>-1)s+=x.length>3?2:1});return s}
 function think(raw){
  var q=norm(raw);
- for(var key in QUICK){if(raw.length<40&&score(q,QUICK[key].w))return {html:QUICK[key][L]}}
+ for(var key in QUICK){if(raw.length<40&&score(q,QUICK[key].w))return {html:QUICK[key][L],quick:true}}
  var best=null,bs=0;KINDS.forEach(function(k){var s=score(q,k.w);if(s>bs){bs=s;best=k}});
  var d=best?best[L]:{t:L=='ar'?'فكرة حلوة 👌 <b>وأي فكرة ممكن تتحول لنظام</b>':'Nice idea 👌 <b>any idea can become a system</b>',p:L=='ar'?['نفهم شغلك ومشكلتك بالظبط','نبني نسخة تجربة تشتغل على موبايلك','نشغّلها ونطوّرها معاك خطوة بخطوة']:['We understand your work and the exact problem','We build a working trial on your phone','We launch it and improve it with you step by step'],x:L=='ar'?'ابعتلي التفاصيل وأنا أرد عليك بخطة كاملة.':'Send me the details and I will reply with a full plan.'};
  var msg=(L=='ar'?'أهلاً كريم 👋 عندي فكرة:\n':'Hi Kareem 👋 I have an idea:\n')+raw;
@@ -782,11 +782,17 @@ function think(raw){
 function say(html,cls){var d=document.createElement('div');d.className='msg '+cls;d.innerHTML=html;$('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight;return d}
 function ask(text){
  text=String(text).trim();if(!text)return;buzz(8);say(esc(text),'me');
- var t=say('<span class="typing"><i></i><i></i><i></i></span>','ai'),local=think(text),done=false;
- var finish=function(h){if(done)return;done=true;t.innerHTML=h;$('chat').scrollTop=$('chat').scrollHeight};
- var ctl=window.AbortController?new AbortController():null;setTimeout(function(){if(ctl)ctl.abort()},14000);
- var p=KM.api?fetch(KM.api,{method:'POST',body:JSON.stringify({a:'ask',q:text,lang:L}),signal:ctl&&ctl.signal}).then(function(r){return r.json()}).then(function(j){if(j&&j.ok&&j.answer)finish(esc(j.answer).replace(/\n/g,'<br>')+'<div class="acts"><a href="'+WA+encodeURIComponent((L=='ar'?'أهلاً كريم 👋 عندي فكرة:\n':'Hi Kareem 👋 I have an idea:\n')+text)+'">'+(L=='ar'?'ابعت فكرتك لكريم':'Send it to Kareem')+'</a></div>')}).catch(function(){}):Promise.resolve();
- Promise.all([p,new Promise(function(r){setTimeout(r,900)})]).then(function(){finish(local.html)});
+ var t=say('<span class="typing"><i></i><i></i><i></i></span>','ai'),local=think(text);
+ var sendTxt=(L=='ar'?'أهلاً كريم 👋 عندي فكرة:\n':'Hi Kareem 👋 I have an idea:\n')+text;
+ /* الرد السريع يظهر فورًا، والخطة الذكية بتيجي بعده في رسالة لوحدها */
+ setTimeout(function(){t.innerHTML=local.html;$('chat').scrollTop=$('chat').scrollHeight;
+  if(!KM.api||local.quick)return;
+  var w=say('<span style="display:flex;gap:8px;align-items:center;color:var(--gold);font-size:13px"><span class="typing"><i></i><i></i><i></i></span>'+(L=='ar'?'بجهزلك خطة مخصوصة لفكرتك…':'Preparing a plan tailored to your idea…')+'</span>','ai');
+  var ctl=window.AbortController?new AbortController():null;setTimeout(function(){if(ctl)ctl.abort()},20000);
+  fetch(KM.api,{method:'POST',body:JSON.stringify({a:'ask',q:text,lang:L}),signal:ctl&&ctl.signal}).then(function(r){return r.json()}).then(function(j){
+   if(j&&j.ok&&j.answer){w.innerHTML='<div style="color:var(--gold);font-size:12.5px;font-weight:700;margin-bottom:4px">✨ '+(L=='ar'?'خطة مخصوصة لفكرتك':'A plan for your idea')+'</div>'+esc(j.answer).replace(/\n/g,'<br>')+'<div class="acts"><a href="'+WA+encodeURIComponent(sendTxt)+'">'+(L=='ar'?'ابعت فكرتك لكريم':'Send it to Kareem')+'</a></div>';$('chat').scrollTop=$('chat').scrollHeight}
+   else w.remove()}).catch(function(){w.remove()});
+ },700);
 }
 function resetChat(){$('chat').innerHTML='';say(L=='ar'?'أهلاً بيك 👋 اكتبلي فكرتك أو مشكلة في شغلك بكلامك العادي، وأنا أوريك نقدر نعمل منها نظام إزاي.':'Hi 👋 describe your idea or a problem in your work in plain words, and I will show you the system we can build.','ai');
  $('chips').innerHTML='';(L=='ar'?['عندي محل وعايز تطبيق','عايز بوت يرد على العملاء','عندي استراتيجية تداول','شغلي كله إكسيل ويدوي']:['I own a shop and want an app','I want a bot for customers','I have a trading strategy','My work is all manual Excel']).forEach(function(p){var b=document.createElement('button');b.type='button';b.textContent=p;b.onclick=function(){ask(p)};$('chips').appendChild(b)})}
