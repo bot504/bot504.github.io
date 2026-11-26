@@ -1,0 +1,17 @@
+{
+  "name": "Kareem Mostafa Elaswany",
+  "short_name": "Kareem",
+  "description": "بنبني أنظمة ذكية للبيزنس بتاعك — الفكرة عليك والنظام علينا",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./?src=app",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#05070d",
+  "theme_color": "#05070d",
+  "icons": [
+    {"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
