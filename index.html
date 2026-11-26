@@ -722,7 +722,7 @@ html[data-keys="3"] #swipe{bottom:calc(100px + env(safe-area-inset-bottom))}
 
 <script>
 var LAB=false;
-var BUILD='202611260931'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
+var BUILD='202611260933'; /* بيتغيّر مع كل رفع، والصفحة المفتوحة بتعرف إن فيه نسخة جديدة */ /* لوحة المعاينة: تتقفل قبل الرفع */
 var L='ar';
 var KM={wa:'201070804071',api:'https://script.google.com/macros/s/AKfycbw9Vvkt-F3L26bCXiLAbSN2984ierqxCQNHcdG8vHZdAjcNYV335GxcDNjMo1_q0QCmHg/exec',media:[],
  status:{mode:'auto',from:10,to:24,on:['متاح للرد دلوقتي','Available to reply now'],off:['هرد عليك من الساعة ١٠ الصبح',"I'll reply from 10 AM"]},
@@ -793,7 +793,7 @@ $('ntA').onclick=function(){if(KM.notice)store.set('km_nt',KM.notice.id);$('noti
 /* ---------- الصفحة بتتحدث لوحدها ---------- */
 function liveData(){if(!KM.api)return;fetch(KM.api+'?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){if(!d||!d.ok)return;['gallery','media','status','tag','goals','notice'].forEach(function(k){if(d[k]!=null)KM[k]=d[k]});kmRender()}).catch(function(){})}
 var lastChk=0;
-function checkBuild(){if(Date.now()-lastChk<60000||location.protocol!='https:')return;lastChk=Date.now();fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(v){if(v&&v.v&&v.v!==BUILD&&!$('kmA').classList.contains('on')){if(window.__swr)window.__swr.update().catch(function(){});setTimeout(function(){location.reload()},300)}}).catch(function(){})}
+function checkBuild(){if(Date.now()-lastChk<60000||location.protocol!='https:')return;lastChk=Date.now();fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(v){if(v&&v.v&&v.v!==BUILD&&!$('kmA').classList.contains('on')){if(window.__swr)window.__swr.update().catch(function(){});setTimeout(function(){try{sessionStorage.setItem('km_rl','1')}catch(e){}location.reload()},300)}}).catch(function(){})}
 document.addEventListener('visibilitychange',function(){if(!document.hidden){liveData();checkBuild();if(window.__swr)window.__swr.update().catch(function(){})}});
 setInterval(function(){if(!document.hidden){liveData();checkBuild()}},90000);
 
@@ -969,10 +969,9 @@ var swT=null,swOff=false;
 function swipeArm(ms){if(swOff)return;clearTimeout(swT);swT=setTimeout(function(){if(!swOff&&scrollY<120)$('swipe').classList.add('on')},ms)}
 addEventListener('scroll',function(){if(scrollY>120){swOff=true;clearTimeout(swT);$('swipe').classList.remove('on')}},{passive:true});
 /* ---------- شاشة الفتح ---------- */
-function intro(force){var sp=$('sp');if(!sp)return;var seen=false;try{seen=sessionStorage.getItem('km_sp')}catch(e){}
+function intro(force){var sp=$('sp');if(!sp)return;var seen=false;try{seen=sessionStorage.getItem('km_rl');sessionStorage.removeItem('km_rl')}catch(e){} /* بتظهر مع كل فتحة، إلا لو الصفحة لسه عاملة تحديث لوحدها */
  var tagUp=function(){if(fromTag&&KM.tag.show)setTimeout(function(){$('tagHi').classList.add('on')},600)};
  if((seen&&!force)||reduce){sp.classList.add('out');swipeArm(2500);ntReady=true;setTimeout(notice,800);tagUp();return}
- try{sessionStorage.setItem('km_sp','1')}catch(e){}
  if(force){var c=sp.cloneNode(true);sp.replaceWith(c);sp=c;c.querySelectorAll('[data-ar]').forEach(function(e){e.textContent=e.getAttribute('data-'+L)})}
  var nm='KAREEM MOSTAFA',k=0,T=sp.querySelector('#spT'),V=sp.querySelector('#spV'),S=sp.querySelector('#spSkip'),tm=[],done=false;
  T.textContent='';
@@ -1012,7 +1011,7 @@ apply();heroStart();
 intro();
 liveData();
 var later=window.requestIdleCallback||function(f){setTimeout(f,1200)};
-addEventListener('load',function(){if(!reduce)later(fx);later(osLoad);if('serviceWorker' in navigator&&location.protocol=='https:'){var hadCtl=!!navigator.serviceWorker.controller,rl=false;navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(r){window.__swr=r;r.update().catch(function(){})}).catch(function(){});navigator.serviceWorker.addEventListener('controllerchange',function(){if(!hadCtl||rl||$('kmA').classList.contains('on'))return;rl=true;location.reload()})}});
+addEventListener('load',function(){if(!reduce)later(fx);later(osLoad);if('serviceWorker' in navigator&&location.protocol=='https:'){var hadCtl=!!navigator.serviceWorker.controller,rl=false;navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(r){window.__swr=r;r.update().catch(function(){})}).catch(function(){});navigator.serviceWorker.addEventListener('controllerchange',function(){if(!hadCtl||rl||$('kmA').classList.contains('on'))return;rl=true;try{sessionStorage.setItem('km_rl','1')}catch(e){}location.reload()})}});
 </script>
 <script>
 /* ===== لوحة كريم: من القفل اللي تحت، أو ضغطة طويلة على صورتك، أو #admin ===== */
